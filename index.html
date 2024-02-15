@@ -48,13 +48,14 @@
   <!-- scripts -->
   <script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
   <script>
-    const copyToClipboard = (text) => {
-      const outputTextArea = document.getElementById('output-textarea');
-      outputTextArea.select();
-      outputTextArea.setSelectionRange(0, 99999);
-      document.execCommand("copy");
-      window.getSelection().removeAllRanges();
-      alert("Copied the text")
+    const copyToClipboard = async () => {
+      const text = document.getElementById('output-textarea').value;
+      try{
+        await navigator.clipboard.writeText(text);
+        alert("Copied the text")
+      } catch (error) {
+        console.error("Error copying text: ", error);
+      }
     }
   </script>
   <script type="text/javascript">
@@ -95,7 +96,6 @@ else:
     print(f"Good >> {output}")
 `
           await pyodide.runPythonAsync(pythonCode);
-          // print로 출력돤 결과를 가져와서 outputTextArea에 출력
           const outputValue = pyodide.globals.get('output');
           outputTextArea.value = outputValue;
         } catch(error) {
