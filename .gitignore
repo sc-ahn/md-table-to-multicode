@@ -1,0 +1,9 @@
+# Python
+*.pyc
+__pycache__/
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
