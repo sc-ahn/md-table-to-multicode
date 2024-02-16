@@ -79,13 +79,15 @@ def convert_table_as_multiline_text(table: Table) -> str:
     result = "```\n"
     result += (
         "    ".join(
-            [f"{element:>{pad_list[i]}}" for i, element in enumerate(table.header)]
+            [f"{element:<{pad_list[i]}}" for i, element in enumerate(table.header)]
         )
         + "\n"
     )
     for row in table.body:
         result += (
-            "    ".join([f"{element:<{pad_list[i]}}" for i, element in enumerate(row)])
+            "    ".join(
+                [f"{element:<{pad_list[i]}}" for i, element in enumerate(row)]
+            )
             + "\n"
         )
     result += "```\n"
