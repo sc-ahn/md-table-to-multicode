@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "md-table-to-multicode"
+version = "0.1.0"
+description = ""
+authors = ["안성철 <scahn@huray.net>"]
+readme = "README.md"
+packages = [{include = "md_table_to_multicode"}]
+
+[tool.poetry.dependencies]
+python = "3.11.3"
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.2.0"
+isort = "^5.13.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -39,3 +39,24 @@ Jane    23
 ```
 
 위와 같이 변환된 멀티코드 블록을 확인할 수 있습니다.
+
+## 파일 구성
+
+```bash
+❯ tree .
+.
+├── INPUT.md # 입력 파일 (run.py 실행시 필요)
+├── OUTPUT.txt # 출력 파일 (run.py 실행결과)
+├── README.md # 지금 보고있는 이 문서
+├── run.py # CLI에서 실행시켜볼 수 있는 코드
+├── convert.py # 변환로직이 작성된 코드
+├── index.html # 웹페이지
+├── main.js # pyodide 및 웹페이지 작동에 필요한 필수 기능
+├── web.js # 웹페이지에서 사용할 부가적인 기능
+├── style.css # 웹페이지 스타일
+├── module # pyodide에서 사용할 모듈
+│   └── convert
+├── misc
+│   └── pyc_loader.py # pyc 파일 로드 테스트
+└── pyproject.toml # 파이썬 프로젝트 설정
+```
