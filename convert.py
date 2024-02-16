@@ -20,9 +20,6 @@ def read_markdown_as_text(path) -> str:
 
 
 def calc_pad_of_each_column(table: Table) -> List[int]:
-    """
-    테이블의 각 열의 최대 길이를 계산하는 함수
-    """
     max_column_length_list = [len(column) for column in table.header]
     for row in table.body:
         for i, element in enumerate(row):
@@ -31,30 +28,6 @@ def calc_pad_of_each_column(table: Table) -> List[int]:
 
 
 def markdown_as_table(text: str) -> Table:
-    """
-    테이블 정보가 기록된 마크다운 파일을 읽어서 Table 객체로 변환하는 함수
-
-    원본 마크다운 예시:
-
-    | col 1 | col 2 | col 3 |
-    |--------|--------|--------|
-    | val 1   | val 2   | val 3   |
-    | val 4   | val 5   | val 6   |
-    | val 7   | val 8   | val 9   |
-
-    이런 마크다운 테이블이 있다고 가정할때, 이 테이블을 아래의 자료구조로 변환하고 싶다.
-
-    변환 이후 예시:
-
-    Table(
-        header=["col 1", "col 2", "col 3"],
-        body=[
-            ["val 1", "val 2", "val 3"],
-            ["val 4", "val 5", "val 6"],
-            ["val 7", "val 8", "val 9"]
-        ]
-    )
-    """
     rows = text.split("\n")
     try:
         table_ = [
