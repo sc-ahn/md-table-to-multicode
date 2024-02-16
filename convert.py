@@ -1,5 +1,11 @@
+from enum import Enum
 from typing import List
 from dataclasses import dataclass
+
+
+class Message(Enum):
+    TABLE_NOT_FOUND = "테이블을 찾을 수 없습니다."
+    WRONG_TABLE_INFO = "테이블 정보가 올바르지 않습니다."
 
 
 @dataclass
@@ -69,7 +75,7 @@ def convert_table_as_multiline_text(table: Table) -> str:
     try:
         pad_list = calc_pad_of_each_column(table)
     except IndexError:
-        return "테이블 정보가 올바르지 않습니다."
+        return Message.WRONG_TABLE_INFO.value
     result = "```\n"
     result += (
         "    ".join(
@@ -79,7 +85,7 @@ def convert_table_as_multiline_text(table: Table) -> str:
     )
     for row in table.body:
         result += (
-            "    ".join([f"{element:>{pad_list[i]}}" for i, element in enumerate(row)])
+            "    ".join([f"{element:<{pad_list[i]}}" for i, element in enumerate(row)])
             + "\n"
         )
     result += "```\n"

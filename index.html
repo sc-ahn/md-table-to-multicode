@@ -1,6 +1,8 @@
 <html>
 <head>
   <title>MD Table to multicode block</title>
+  <!-- styles -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <!-- flex div -->
@@ -23,89 +25,19 @@
       you'll see the result here
 
       ```
-      column 1    column 2    column 3
-       value 1     value 2     value 3
-       value 4     value 5     value 6
-       value 7     value 8     value 9
+        column 1    column 2    column 3
+        value 1     value 2     value 3
+        value 4     value 5     value 6
+        value 7     value 8     value 9
       ```
       "
       ></textarea>
       <button onclick="copyToClipboard()">COPY</button>
     </div>
   </div>
-
-  <!-- styles -->
-  <style>
-    .body {
-      height: 100vh;
-    }
-    textarea {
-      width: 60vw;
-      height: 25vh;
-    }
-  </style>
-
   <!-- scripts -->
-  <script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
-  <script>
-    const copyToClipboard = async () => {
-      const text = document.getElementById('output-textarea').value;
-      try{
-        await navigator.clipboard.writeText(text);
-        alert("Copied the text")
-      } catch (error) {
-        console.error("Error copying text: ", error);
-      }
-    }
-  </script>
-  <script type="text/javascript">
-    let pyodide;
-    async function initPyodide() {
-      pyodide = await loadPyodide();
-    }
-
-    const loadExternalScript = async (scriptUrl) => {
-      const response = await fetch(scriptUrl);
-      const scriptContent = await response.text();
-      return scriptContent;
-    }
-    const executePythonCode = async () => {
-      const inputTextArea = document.getElementById('input-textarea');
-      const outputTextArea = document.getElementById('output-textarea');
-      const inputValue = inputTextArea.value;
-
-      if (pyodide) {
-        try {
-          if (!inputValue) {
-            outputTextArea.value = "";
-            return;
-          }
-          const externalScript = await loadExternalScript('convert.py');
-          const pythonCode = `
-${externalScript}
-
-CANNOT_FOUND_TABLE = "테이블을 찾을 수 없습니다."
-input_value = """${inputValue}"""
-table = markdown_as_table(input_value)
-if not table.header:
-    output = CANNOT_FOUND_TABLE
-elif not table.body:
-    output = CANNOT_FOUND_TABLE
-else:
-    output = convert_table_as_multiline_text(table)
-    print(f"Good >> {output}")
-`
-          await pyodide.runPythonAsync(pythonCode);
-          const outputValue = pyodide.globals.get('output');
-          outputTextArea.value = outputValue;
-        } catch(error) {
-          console.error("Error executing Python code: ", error);
-        }
-      } else {
-        console.error("Pyodide is not loaded");
-      }
-    }
-    initPyodide();
-  </script>
+  <script async src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
+  <script async src="web.js"></script>
+  <script async src="main.js"></script>
 </body>
 </html>
