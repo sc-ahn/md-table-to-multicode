@@ -8,6 +8,10 @@
 
 ## 사용법
 
+### 작성된 페이지를 열어서 사용
+
+[여기를 클릭](https://sc-ahn.github.io/md-table-to-multicode/)
+
 ### 파이썬 코드 실행
 
 ```markdown
@@ -21,6 +25,9 @@
 
 ```bash
 python run.py
+
+# 혹은 아래와 같이 경로 제공하여 실행
+# python run.py INPUT.md OUTPUT.txt
 ```
 
 이후 `run.py` 파일을 실행합니다.
