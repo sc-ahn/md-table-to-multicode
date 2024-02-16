@@ -85,7 +85,6 @@ const loadExternalFileAsBytes = async (fileUrl) => {
 }
 
 const executePythonCode = async () => {
-  // Combine pre-written Python code with user input
   Global.js.input = inputTextArea.value;
   if (pyodide) {
     try {
